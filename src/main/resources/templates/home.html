@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lotte & Dieter - Home</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Happy+Monkey" rel="stylesheet">
+    <link href="/assets/css/reset.css" rel="stylesheet" type="text/css"/>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" rel="stylesheet"/>
+    <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" rel="stylesheet"/>
+    <link href="/assets/css/main.css" rel="stylesheet" type="text/css"/>
+
+    <link rel="icon" type="image/jpeg" href="/media/favicon.jpeg">
+</head>
+<body>
+<header>
+    <div class="header-titles">
+        <h1>Welcome home my love<3</h1>
+        <h2 th:replace="~{common/couple_counter :: couple_counter}"></h2>
+    </div>
+
+    <nav th:replace="~{common/navbar :: navigation}"></nav>
+</header>
+<main class="container">
+    <section>
+        <h2>About</h2>
+
+        <div>
+            <p>
+                On this site we can manage the things we want to do and what we have done. Initially it was mostly designed to help us choose whether
+                we should watch something or play a game and what we should / could watch. <br />
+                Also, I wanted to repeat that I love you soooo much and I really cannot imagine any girlfriend to be better than you, at least for me<3
+            </p>
+            <p>
+                And just to be random, because that's what we do <3, I wanted to add a little cat gif&colon;
+                <img src="https://media1.tenor.com/images/ef8311785a0ae48ae2ebf5871a5ce0df/tenor.gif" alt="dancing cat gif"/>
+            </p>
+        </div>
+    </section>
+</main>
+<footer th:insert="~{common/footer :: footer}"></footer>
+
+<script src="assets/js/main.js"></script>
+
+<script crossorigin="anonymous"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+</body>
+</html>

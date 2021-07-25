@@ -1,0 +1,1 @@
+alter table movie add column movie_type varchar (255) default 'MOVIE';

@@ -1,0 +1,47 @@
+header {
+    height: 200px;
+    display: block;
+    align-content: space-around;
+}
+
+header .header-titles {
+    width: 100%;
+    padding-top: 15px;
+}
+
+header h2 {
+    position: absolute;
+    left: 15px;
+    top: 0;
+    font-size: 1.3rem;
+    line-height: 25px;
+    text-align: left;
+}
+
+header h2 p {
+    font-size: 1rem;
+}
+
+nav.navbar {
+    margin-top: 0;
+}
+
+h1 {
+    margin-bottom: 25px;
+}
+
+header::before {
+    background: url('/media/subpage.png') no-repeat;
+    background-size: cover;
+    background-position-y: -450px;
+}
+
+.container {
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 850px) {
+    header {
+        flex-direction: row;
+    }
+}

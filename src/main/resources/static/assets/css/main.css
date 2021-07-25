@@ -1,0 +1,319 @@
+html, body {
+    height: 100%;
+}
+
+header {
+    position: relative;
+    font-family: 'Happy Monkey', cursive;
+    color: white;
+    height: 80%;
+
+    display: flex;
+    align-items: end;
+    align-content: flex-end;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+header h2 p {
+    font-size: 1.2rem;
+}
+
+header > div {
+    z-index: 30;
+}
+
+header::before {
+    content: ' ';
+    background: url('/media/a silent voice.gif') no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: .5;
+    z-index: -1;
+}
+
+header::after {
+    content: ' ';
+    background: rgba(0, 0, 0, 0.6);
+    background-size: 100% 100%;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 5px 10px;
+}
+
+header h2 {
+    font-size: 1.8rem;
+    margin-top: 10px;
+    line-height: 38px;
+}
+
+header img {
+    margin-left: 25px;
+    max-height: 250px;
+    border-radius: 10%;
+}
+
+header a, header a:hover {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+header a:hover {
+    color: dodgerblue;
+}
+
+header .header-titles {
+    width: 50%;
+    text-align: center;
+}
+
+header h2 span {
+    font-weight: bold;
+}
+
+nav.navbar {
+    width: 100%;
+    left: 0;
+    top: 0;
+    padding: 15px !important;
+    margin-top: 100px;
+}
+
+.navbar-nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.nav-item {
+    padding: 20px;
+}
+
+nav ul li a, nav ul li span {
+    font-size: 1.4rem;
+    color: white !important;
+}
+
+nav ul li span {
+    cursor: pointer;
+}
+
+header .arrow {
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    bottom: 20px;
+    border: solid lightgray;
+    border-width: 0 2px 2px 0;
+    cursor: pointer;
+}
+
+main section {
+    text-align: center;
+    margin: 30px 0;
+}
+
+main section h2 {
+    font-family: 'Happy Monkey', cursive;
+    font-size: 2.3rem;
+    border-bottom: 1px solid #e2e2e2;
+    padding-bottom: 10px;
+}
+
+main section p {
+    text-align: left;
+    font-size: 1.1rem;
+}
+
+.comment {
+    display: block;
+    font-size: .75rem;
+    text-align: right;
+}
+
+footer {
+    padding: 15px 0;
+    box-shadow: inset 0 3px 3px -3px rgba(50, 50, 50, 0.75);
+}
+
+footer > div {
+    font-family: 'Happy Monkey', cursive;
+    margin: 5px auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer p, footer ul {
+    margin-bottom: 0;
+}
+
+footer .links li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+footer .links li:last-of-type {
+    margin-right: 0;
+}
+
+footer .links a {
+    font-size: 2rem;
+}
+
+footer .links a:hover {
+    text-decoration: none;
+    filter: brightness(85%);
+}
+
+.fa-instagram {
+    color: #ff2468 !important;
+}
+
+.fa-discord {
+    color: #7289da !important;
+}
+
+.fa-linkedin {
+    color: #2567b3 !important;
+}
+
+.fa-github-square {
+    color: #323131 !important;
+}
+
+.fa-gitlab {
+    color: #fc6d26 !important;
+}
+
+/* Utility */
+.arrow {
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 10px;
+}
+
+.arrow.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.arrow.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.arrow.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.arrow.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+ul.editable-list li {
+    margin: 10px;
+}
+
+ul.editable-list span {
+    border-bottom: 1px dashed transparent;
+}
+
+ul.editable-list li[data-new="true"] {
+    color: #777;
+}
+
+ul.editable-list li input, ul.editable-list li span {
+    width: 100%;
+    text-align: left;
+}
+
+ul.editable-list li input {
+    display: none;
+    border: 0;
+    outline: 0;
+    padding: 0;
+}
+
+ul.editable-list li.edit span {
+    display: none;
+}
+
+ul.editable-list li.edit input {
+    display: initial;
+    border-bottom: 1px dashed #000;
+}
+
+ul.editable-list {
+    list-style: disc;
+    text-align: left;
+}
+
+/* Media queries */
+@media (max-width: 1000px) {
+    #about p {
+        width: 100%;
+    }
+}
+
+@media (max-width: 890px) {
+    footer > div {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    footer p {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 850px) {
+    header {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    header > div {
+        text-align: center;
+    }
+}
+
+@media (max-width: 770px) {
+    #about img {
+        display: none;
+    }
+}
+
+@media (max-width: 510px) {
+    nav li:first-of-type {
+        display: none;
+    }
+}
+
+@media (max-width: 400px) {
+    nav.navbar {
+        padding: 0 !important;
+    }
+}
