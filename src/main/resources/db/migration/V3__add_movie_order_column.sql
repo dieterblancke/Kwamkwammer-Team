@@ -1,0 +1,1 @@
+alter table movie add column position int default -1;
