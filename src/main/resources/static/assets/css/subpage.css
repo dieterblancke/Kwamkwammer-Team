@@ -1,15 +1,15 @@
-header {
+#header {
     height: 200px;
     display: block;
     align-content: space-around;
 }
 
-header .header-titles {
+#header .header-titles {
     width: 100%;
     padding-top: 15px;
 }
 
-header h2 {
+#header h2 {
     position: absolute;
     left: 15px;
     top: 0;
@@ -18,8 +18,39 @@ header h2 {
     text-align: left;
 }
 
-header h2 p {
+#header h2 p {
     font-size: 1rem;
+}
+
+#watchlist {
+    min-height: 70vh;
+}
+
+.kanban-container div footer button {
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.kanban-container div:nth-of-type(1) footer button {
+    background: #C25964;
+}
+
+.kanban-container div:nth-of-type(2) footer button {
+    background: #FDFD96;
+}
+
+.kanban-container div:nth-of-type(3) footer button {
+    background: #C3B1E1;
+}
+
+.kanban-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kanban-item i {
+    color: #C25964;
 }
 
 nav.navbar {
@@ -30,7 +61,7 @@ h1 {
     margin-bottom: 25px;
 }
 
-header::before {
+#header::before {
     background: url('/media/subpage.png') no-repeat;
     background-size: cover;
     background-position-y: -450px;
@@ -41,7 +72,7 @@ header::before {
 }
 
 @media (max-width: 850px) {
-    header {
+    #header {
         flex-direction: row;
     }
 }

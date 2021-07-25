@@ -16,7 +16,7 @@
     <link rel="icon" type="image/jpeg" href="/media/favicon.jpeg">
 </head>
 <body>
-<header>
+<header id="header">
     <div class="header-titles">
         <h1>Welcome home my love<3</h1>
         <h2 th:replace="~{common/couple_counter :: couple_counter}"></h2>
@@ -41,7 +41,7 @@
         </div>
     </section>
 </main>
-<footer th:insert="~{common/footer :: footer}"></footer>
+<footer id="footer" th:insert="~{common/footer :: footer}"></footer>
 
 <script src="assets/js/main.js"></script>
 

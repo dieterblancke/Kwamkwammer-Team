@@ -13,13 +13,13 @@
           integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" rel="stylesheet"/>
     <link href="/assets/css/main.css" rel="stylesheet" type="text/css"/>
     <link href="/assets/css/subpage.css" rel="stylesheet" type="text/css"/>
-    <script src="/assets/css/jkanban.min.css"></script>
+    <link href="/assets/css/jkanban.css" rel="stylesheet" type="text/css"/>
 
     <link rel="icon" type="image/jpeg" href="/media/favicon.jpeg">
 </head>
 
 <body>
-<header>
+<header id="header">
     <div class="header-titles">
         <h1>Watchlist</h1>
         <h2 th:replace="~{common/couple_counter :: couple_counter}"></h2>
@@ -58,117 +58,78 @@
     <!--            </article>-->
     <!--        </div>-->
 </main>
-<footer th:insert="~{common/footer :: footer}"></footer>
+<footer id="footer" th:insert="~{common/footer :: footer}"></footer>
 
 <script src="/assets/js/main.js"></script>
-<script src="/assets/js/jkanban.min.js"></script>
+<script src="/assets/js/jkanban.js"></script>
 
 <script>
-    let kanbanTest = new jKanban({
-        element: "#watchlist",
-        gutter: "10px",
-        widthBoard: "450px",
-        itemHandleOptions:{
-            enabled: true,
-        },
-        click: function(el) {
-            console.log("Trigger on all items click!");
-        },
-        context: function(el, e) {
-            console.log("Trigger on all items right-click!");
-        },
-        dropEl: function(el, target, source, sibling){
-            console.log(target.parentElement.getAttribute('data-id'));
-            console.log(el, target, source, sibling)
-        },
-        buttonClick: function(el, boardId) {
-            console.log(el);
-            console.log(boardId);
-            // create a form to enter element
-            var formItem = document.createElement("form");
-            formItem.setAttribute("class", "itemform");
-            formItem.innerHTML =
-                '<div class="form-group"><textarea class="form-control" rows="2" autofocus></textarea></div><div class="form-group"><button type="submit" class="btn btn-primary btn-xs pull-right">Submit</button><button type="button" id="CancelBtn" class="btn btn-default btn-xs pull-right">Cancel</button></div>';
-
-            kanbanTest.addForm(boardId, formItem);
-            formItem.addEventListener("submit", function(e) {
-                e.preventDefault();
-                var text = e.target[0].value;
-                kanbanTest.addElement(boardId, {
-                    title: text
-                });
-                formItem.parentNode.removeChild(formItem);
-            });
-            document.getElementById("CancelBtn").onclick = function() {
-                formItem.parentNode.removeChild(formItem);
-            };
-        },
+    const kanban = new jKanban({
+        element: '#watchlist',
+        gutter: '40px',
         itemAddOptions: {
             enabled: true,
-            content: '+ Add New Card',
-            class: 'custom-button',
+            content: '+',
+            class: 'kanban-title-button btn btn-default btn-xs',
             footer: true
+        },
+        itemHandleOptions: {
+            enabled: false,
+            handleClass: "item_handle",
+            customCssHandler: "drag_handler",
+            customCssIconHandler: "drag_handler_icon",
+            customHandler: "<span>%title%</span> <i class='fas fa-trash'></i>"
         },
         boards: [
             {
-                id: "_todo",
-                title: "To Do (Can drop item only in working)",
-                class: "info,good",
-                dragTo: ["_working"],
-                item: [
-                    {
-                        id: "_test_delete",
-                        title: "Try drag this (Look the console)",
-                        drag: function(el, source) {
-                            console.log("START DRAG: " + el.dataset.eid);
-                        },
-                        dragend: function(el) {
-                            console.log("END DRAG: " + el.dataset.eid);
-                        },
-                        drop: function(el) {
-                            console.log("DROPPED: " + el.dataset.eid);
-                        }
-                    },
-                    {
-                        title: "Try Click This!",
-                        click: function(el) {
-                            alert("click");
-                        },
-                        context: function(el, e){
-                            alert("right-click at (" + `${e.pageX}` + "," + `${e.pageX}` + ")")
-                        },
-                        class: ["peppe", "bello"]
-                    }
-                ]
+                'id': '_watchlist',
+                'title': 'Watch list',
+                'class': 'color-pastel-wine-red'
             },
             {
-                id: "_working",
-                title: "Working (Try drag me too)",
-                class: "warning",
-                item: [
-                    {
-                        title: "Do Something!"
-                    },
-                    {
-                        title: "Run?"
-                    }
-                ]
+                'id': '_finished',
+                'title': 'Finished Watching',
+                'class': 'color-pastel-yellow'
             },
             {
-                id: "_done",
-                title: "Done (Can drop item only in working)",
-                class: "success",
-                dragTo: ["_working"],
-                item: [
-                    {
-                        title: "All right"
-                    },
-                    {
-                        title: "Ok!"
-                    }
-                ]
+                'id': '_awaiting',
+                'title': 'Awaiting new movies',
+                'class': 'color-pastel-purple'
             }
         ]
+    });
+</script>
+
+<script type="text/javascript" th:inline="javascript">
+    const movies = [];
+
+    /*[# th:each="movie : ${movies}"]*/
+    movies.push({
+        id: "[(${movie.id})]",
+        name: "[(${movie.name})]"
+    });
+    /*[/]*/
+
+    for (let movie of movies) {
+        kanban.addElement(
+            "_watchlist",
+            {
+                "id": movie.id,
+                "title": movie.name
+            }
+        );
+    }
+</script>
+
+<script type="text/javascript">
+    document.querySelector("#watchlist").addEventListener("click", (event) => {
+        if (event.target.classList.contains("fa-trash")) {
+            const kanbanItem = event.target.parentElement;
+            const id = kanbanItem.getAttribute("data-eid");
+
+            // TODO: remove call to backend and only run removeElement on SUCCESS
+            kanban.removeElement(id);
+        }
     });
 </script>
 
