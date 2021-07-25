@@ -1,6 +1,6 @@
 package be.dieterblancke.kwamkwammer.domain;
 
-import be.dieterblancke.kwamkwammer.enums.MovieType;
+import be.dieterblancke.kwamkwammer.enums.MovieStatus;
 
 import javax.persistence.*;
 
@@ -10,9 +10,11 @@ public class Movie extends BaseEntity
 {
 
     private String name;
-    @Column( name = "movie_type" )
+
+    @Column( name = "movie_status" )
     @Enumerated( EnumType.STRING )
-    private MovieType movieType;
+    private MovieStatus status;
+    private int position;
 
     public String getName()
     {
@@ -24,13 +26,23 @@ public class Movie extends BaseEntity
         this.name = name;
     }
 
-    public MovieType getMovieType()
+    public MovieStatus getStatus()
     {
-        return movieType;
+        return status;
     }
 
-    public void setMovieType( MovieType movieType )
+    public void setStatus( MovieStatus status )
     {
-        this.movieType = movieType;
+        this.status = status;
+    }
+
+    public int getPosition()
+    {
+        return position;
+    }
+
+    public void setPosition( int position )
+    {
+        this.position = position;
     }
 }

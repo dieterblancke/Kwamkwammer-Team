@@ -36,21 +36,30 @@
 }
 
 .kanban-container div:nth-of-type(2) footer button {
-    background: #FDFD96;
+    background: #FFD1DC;
 }
 
 .kanban-container div:nth-of-type(3) footer button {
     background: #C3B1E1;
 }
 
+.kanban-container div:nth-of-type(4) footer button {
+    background: #FDFD96;
+}
+
 .kanban-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px !important;
+    margin-bottom: 10px !important;
 }
 
 .kanban-item i {
     color: #C25964;
+    padding: 5px;
+    cursor: pointer;
+    z-index: 1000;
 }
 
 nav.navbar {

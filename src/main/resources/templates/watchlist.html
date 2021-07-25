@@ -16,6 +16,17 @@
     <link href="/assets/css/jkanban.css" rel="stylesheet" type="text/css"/>
 
     <link rel="icon" type="image/jpeg" href="/media/favicon.jpeg">
+
+    <style>
+        main.container {
+            max-width: 90vw;
+        }
+
+        #watchlist {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -62,15 +73,44 @@
 
 <script src="/assets/js/main.js"></script>
 <script src="/assets/js/jkanban.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script>
+<script type="text/javascript" th:inline="javascript">
     const kanban = new jKanban({
         element: '#watchlist',
-        gutter: '40px',
+        gutter: '25px',
+        dragBoards: false,
+        dropEl: (el, target) => {
+            const id = el.getAttribute("data-eid");
+            const status = target.parentElement.getAttribute("data-id");
+
+            const boardElements = kanban.getBoardElements(status);
+            const moviePositions = [];
+
+            for (let i = 0; i < boardElements.length; i++) {
+                moviePositions.push({
+                    id: boardElements[i].getAttribute("data-eid"),
+                    position: i,
+                });
+            }
+
+            fetch('/watchlist', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    movie: {
+                        id, status
+                    },
+                    moviePositions
+                }),
+            });
+        },
         itemAddOptions: {
             enabled: true,
             content: '+',
-            class: 'kanban-title-button btn btn-default btn-xs',
+            class: 'kanban-title-button btn btn-default btn-xs add-movie',
             footer: true
         },
         itemHandleOptions: {
@@ -82,57 +122,103 @@
         },
         boards: [
             {
-                'id': '_watchlist',
+                'id': 'UNWATCHED',
                 'title': 'Watch list',
                 'class': 'color-pastel-wine-red'
             },
             {
-                'id': '_finished',
-                'title': 'Finished Watching',
-                'class': 'color-pastel-yellow'
+                'id': 'WATCHING',
+                'title': 'Watching',
+                'class': 'color-pastel-pink'
             },
             {
-                'id': '_awaiting',
-                'title': 'Awaiting new movies',
+                'id': 'AWAITING_EPISODES',
+                'title': 'Awaiting new episodes',
                 'class': 'color-pastel-purple'
+            },
+            {
+                'id': 'FINISHED',
+                'title': 'Finished Watching',
+                'class': 'color-pastel-yellow'
             }
         ]
     });
-</script>
 
-<script type="text/javascript" th:inline="javascript">
     const movies = [];
 
     /*[# th:each="movie : ${movies}"]*/
     movies.push({
         id: "[(${movie.id})]",
-        name: "[(${movie.name})]"
+        name: "[(${movie.name})]",
+        status: "[(${movie.status})]",
+        position: "[(${movie.position})]",
     });
     /*[/]*/
 
-    for (let movie of movies) {
-        kanban.addElement(
-            "_watchlist",
-            {
-                "id": movie.id,
-                "title": movie.name
-            }
-        );
-    }
-</script>
+    movies.forEach(addMovie);
 
-<script type="text/javascript">
-    document.querySelector("#watchlist").addEventListener("click", (event) => {
+    document.querySelector("#watchlist").addEventListener("click", event => {
         if (event.target.classList.contains("fa-trash")) {
             const kanbanItem = event.target.parentElement;
             const id = kanbanItem.getAttribute("data-eid");
 
-            // TODO: remove call to backend and only run removeElement on SUCCESS
-            kanban.removeElement(id);
+            fetch('/watchlist', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: id,
+            }).then(function (response) {
+                return response.json();
+            }).then(function (movieId) {
+                kanban.removeElement(`${movieId}`);
+            });
         }
     });
 
-    // TODO: on add click, use SweetAlert with textarea input for multi line add of movies <3
+    document.querySelectorAll(".add-movie").forEach(function (movie) {
+        movie.addEventListener("click", async function (event) {
+            const id = event.target.parentElement.parentElement.getAttribute("data-id");
+            const result = await Swal.fire({
+                input: 'textarea',
+                inputLabel: 'Movies, series and animes',
+                inputPlaceholder: 'Type your movie, serie and/or anime names here ...',
+                showCancelButton: true
+            });
+
+            if (result.isConfirmed) {
+                const moviesToAdd = result.value.split("\n");
+
+                fetch('/watchlist', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(moviesToAdd.map(movie => {
+                        return {
+                            name: movie,
+                            status: id,
+                        };
+                    })),
+                }).then(function (response) {
+                    return response.json();
+                }).then(function (movies) {
+                    movies.forEach(addMovie);
+                });
+            }
+        });
+    });
+
+    function addMovie(movie) {
+        kanban.addElement(
+            movie.status,
+            {
+                id: movie.id,
+                title: movie.name,
+                position: movie.position,
+            }
+        );
+    }
 </script>
 
 <script crossorigin="anonymous"

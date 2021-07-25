@@ -1,6 +1,6 @@
 package be.dieterblancke.kwamkwammer.enums;
 
-public enum MovieType
+public enum MovieStatus
 {
-    MOVIE,SERIE;
+    UNWATCHED,WATCHING,FINISHED,AWAITING_EPISODES;
 }
