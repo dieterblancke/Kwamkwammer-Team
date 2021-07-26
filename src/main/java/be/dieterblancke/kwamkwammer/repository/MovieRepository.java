@@ -13,7 +13,7 @@ import java.util.List;
 public interface MovieRepository extends JpaRepository<Movie, Long>
 {
 
-    @Query("from Movie order by position")
+    @Query("from Movie order by position, id")
     List<Movie> findAll();
 
     @Query( "select m from Movie m where status = :status" )
