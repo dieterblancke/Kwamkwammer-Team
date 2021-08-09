@@ -285,6 +285,25 @@ ul.editable-list {
     background: #C3B1E1;
 }
 
+.multi-language p {
+    margin-bottom: 0;
+    font-family: 'Happy Monkey', cursive;
+}
+
+.multi-language p iframe {
+    margin-top: 15px;
+}
+
+.language-selector {
+    font-family: 'Happy Monkey', cursive;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.language-selector li {
+    padding: 15px;
+}
+
 /* Media queries */
 @media (max-width: 1000px) {
     #about p {

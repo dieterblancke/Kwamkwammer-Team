@@ -40,12 +40,8 @@ class TogetherTimeManager {
 
             const seconds = Math.floor(delta % 60);
 
-            element.innerHTML = `${this.pluralize("year", years)} ${this.pluralize("day", days)} ${this.pluralize("hour", hours)} ${this.pluralize("minute", minutes)} ${this.pluralize("second", seconds)}`;
+            element.innerHTML = `${pluralize("year", years)} ${pluralize("day", days)} ${pluralize("hour", hours)} ${pluralize("minute", minutes)} ${pluralize("second", seconds)}`;
         });
-    }
-
-    pluralize(word, amount) {
-        return amount + " " + word + (amount === 1 ? "" : "s");
     }
 }
 
@@ -54,3 +50,7 @@ class TogetherTimeManager {
 
     document.addEventListener('DOMContentLoaded', bootstrap.init.bind(bootstrap));
 })();
+
+function pluralize(word, amount) {
+    return amount + " " + word + (amount === 1 ? "" : "s");
+}
