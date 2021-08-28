@@ -30,11 +30,34 @@
             line-height: 25px;
             text-align: right;
         }
+
+        #yt-video {
+            position: fixed;
+            height: 100vh;
+            width: 100vw;
+            z-index: 100;
+        }
+
+        #hide-yt {
+            z-index: 150;
+            background: #C25964;
+            font-size: 1.3rem;
+            color: white;
+            padding: 25px;
+            position: absolute;
+            right: 30px;
+            top: 80px;
+        }
     </style>
 </head>
 
 <body>
 <div class="parent" style="display: none;">
+    <button id="hide-yt">Toggle video</button>
+    <iframe id="yt-video" style="" src="https://www.youtube.com/embed/0Gfqdljvxwk" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+
     <header id="header">
         <div class="header-titles">
             <h1>Happy 18th birthday my love <3</h1>
@@ -195,6 +218,18 @@
     }
 
     checkPassword();
+</script>
+
+<script>
+    document.querySelector("#hide-yt").addEventListener("click", (event) => {
+        const video = document.querySelector("#yt-video");
+
+        if (video.getAttribute("style").includes("display")) {
+            video.setAttribute("style", "");
+        } else {
+            video.setAttribute("style", "display: none");
+        }
+    });
 </script>
 
 <script>
