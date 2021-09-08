@@ -1,5 +1,5 @@
 #header {
-    height: 200px;
+    height: 325px;
     display: block;
     align-content: space-around;
 }
@@ -67,17 +67,36 @@ nav.navbar {
 }
 
 h1 {
-    margin-bottom: 25px;
+    margin-top: 160px;
+    margin-bottom: 0;
 }
 
 #header::before {
     background: url('/media/subpage.png') no-repeat;
     background-size: cover;
-    background-position-y: -450px;
+    background-position-y: -250px;
 }
 
 .container {
     margin-top: 1.5rem;
+}
+
+@media (max-width: 1050px) {
+    #header h2, #header h3 {
+        width: 100%;
+        left: 0;
+        right: 0;
+        text-align: center;
+    }
+
+    #header h3 {
+        top: 100px;
+    }
+
+    #hide-yt {
+        top: 15px !important;
+        right: 15px !important;
+    }
 }
 
 @media (max-width: 850px) {
