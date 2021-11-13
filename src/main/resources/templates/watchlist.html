@@ -39,6 +39,10 @@
     <h2 th:replace="~{common/navbar :: navigation}"></h2>
 </header>
 <main class="container">
+    <div class="d-flex justify-content-center mb-3">
+        <button class="btn btn-primary" id="random-movie">Pick random movie / serie</button>
+    </div>
+
     <div id="watchlist"></div>
 </main>
 <footer id="footer" th:insert="~{common/footer :: footer}"></footer>
@@ -146,6 +150,17 @@
                 kanban.removeElement(`${movieId}`);
             });
         }
+    });
+
+    document.querySelector("#random-movie").addEventListener("click", (event) => {
+        const filteredMovies = movies.filter(movie => movie.status == "WATCHING" || movie.status == "UNWATCHED");
+        const movie = filteredMovies[Math.floor(Math.random() * filteredMovies.length)];
+
+        Swal.fire({
+            title: '<p style="font-size: 1.5rem"><span style="font-weight: 200">The magical kwamkwammer says you should watch:</span> \n' + movie.name + '</p>',
+            icon: 'info',
+            width: 750,
+        });
     });
 
     document.querySelectorAll(".add-movie").forEach(function (movie) {
