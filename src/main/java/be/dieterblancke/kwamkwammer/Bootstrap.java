@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 )
 public class Bootstrap
 {
+
     public static void main( final String[] args )
     {
         SpringApplication.run( Bootstrap.class, args );

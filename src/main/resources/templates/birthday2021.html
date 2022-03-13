@@ -14,6 +14,7 @@
     <link href="/assets/css/main.css" rel="stylesheet" type="text/css"/>
     <link href="/assets/css/subpage.css" rel="stylesheet" type="text/css"/>
     <link href="/assets/css/jkanban.css" rel="stylesheet" type="text/css"/>
+    <meta charset="ISO-8859-1" />
 
     <link rel="icon" type="image/jpeg" href="/media/favicon.jpeg">
 
@@ -52,7 +53,7 @@
 </head>
 
 <body>
-<div class="parent" style="display: none;">
+<div class="parent">
     <button id="hide-yt">Toggle video</button>
     <iframe id="yt-video" style="" src="https://www.youtube.com/embed/0Gfqdljvxwk" title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -186,40 +187,6 @@
 <script src="/assets/js/main.js"></script>
 <script src="/assets/js/multi-language-texts.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    async function checkPassword() {
-        const correctPassword = "forevertogethersince110621";
-
-        const url = new URL(window.location);
-        var password = url.searchParams.get("password");
-
-        if (!password || password !== correctPassword) {
-            var {value: password} = await Swal.fire({
-                title: 'Enter your password',
-                input: 'password',
-                inputLabel: 'Password',
-                inputPlaceholder: 'Enter your password',
-                inputAttributes: {
-                    maxlength: 50,
-                    autocapitalize: 'off',
-                    autocorrect: 'off'
-                },
-                inputValidator: (value) => {
-                    if (!value || value !== correctPassword) {
-                        return 'An incorrect password was entered, ask Dieter for the correct password ❤'
-                    }
-                }
-            });
-        }
-
-        if (password && password === correctPassword) {
-            document.querySelector(".parent").setAttribute("style", "");
-        }
-    }
-
-    checkPassword();
-</script>
-
 <script>
     document.querySelector("#hide-yt").addEventListener("click", (event) => {
         const video = document.querySelector("#yt-video");

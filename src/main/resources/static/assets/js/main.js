@@ -7,8 +7,8 @@ class Bootstrap {
     }
 
     initTogetherTimeManager() {
-        this.togetherTimeManager = new TogetherTimeManager();
-        this.togetherTimeManager.init();
+        // this.togetherTimeManager = new TogetherTimeManager();
+        // this.togetherTimeManager.init();
     }
 }
 
